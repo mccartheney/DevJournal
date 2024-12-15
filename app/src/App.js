@@ -15,10 +15,10 @@ function App() {
 
 
   return (
-    <>
+    <main>
       <CommandResultList lastCommand={lastCommand} outputsList={outputsList} commandList={commandList} setOutputList={setOutputsList}/>
       <ActiveCommand terminalInputRef={terminalInputRef} outputsList={outputsList} setCommandList={setCommandList} setLastCommand={setLastCommand} />
-    </>
+    </main>
   );
 }
 

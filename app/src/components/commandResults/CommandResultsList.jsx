@@ -1,5 +1,7 @@
 import { useEffect, useRef } from "react"
 import UsedCommand from "../commandLine/UsedCommand"
+import Help from "./results/Help"
+import NoResult from "./results/NoResult"
 
 const CommandResultList = ({setOutputList, lastCommand, commandList, outputsList }) => {
     // ref to cehck if is the first rendes (first render should be ignored, if not will render a empty usedCommand)
@@ -20,6 +22,10 @@ const CommandResultList = ({setOutputList, lastCommand, commandList, outputsList
         
         // switch to manage the command made by user
         switch (lastCommand) {
+            case "help" :
+                // show all commands options
+                setOutputList(oldOutputList => [...oldOutputList, <Help/>])
+                break;
             case "clear":
                 // clear the outputList
                 setOutputList([])
@@ -27,11 +33,7 @@ const CommandResultList = ({setOutputList, lastCommand, commandList, outputsList
         
             default:
                 // if is a command that not exists, warn it to user 
-                // creating a warning and appending to the outputList
-                const commandResult = <p>
-                    Dont exist that command
-                </p>
-                setOutputList(oldOutputList => [...oldOutputList, commandResult])
+                setOutputList(oldOutputList => [...oldOutputList, <NoResult/>])
 
                 break;
         }

@@ -1,0 +1,114 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap");
+*, *:before, *:after {
+  box-sizing: border-box;
+  outline: none;
+}
+
+* {
+  font-family: "Roboto Mono", serif !important;
+}
+
+html, body, div, span, object, iframe, figure, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, code, em, img, small, strike, strong, sub, sup, tt, b, u, i, ol, ul, li, fieldset, form, label, table, caption, tbody, tfoot, thead, tr, th, td, main, canvas, embed, footer, header, nav, section, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: none;
+     -moz-text-size-adjust: none;
+          text-size-adjust: none;
+}
+
+footer, header, nav, section, main {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after, q:before, q:after {
+  content: "";
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+input {
+  -webkit-appearance: none;
+  border-radius: 0;
+}
+
+body {
+  background-color: #261d35;
+}
+
+.usedCommand, .activeCommand {
+  margin-bottom: 10px;
+  display: flex;
+}
+.usedCommand p, .activeCommand p {
+  font-size: 18px;
+}
+.usedCommand input, .activeCommand input {
+  margin-top: -3px;
+  border: none;
+  margin-left: 10px;
+  font-size: 18px;
+  background: none;
+  color: #f2eff8;
+}
+.usedCommand .activeCommand_name, .usedCommand .usedCommand_name, .activeCommand .activeCommand_name, .activeCommand .usedCommand_name {
+  color: #8ebf73;
+}
+.usedCommand .activeCommand_separator, .usedCommand .usedCommand_separator, .activeCommand .activeCommand_separator, .activeCommand .usedCommand_separator {
+  color: #f2eff8;
+  margin: 0px 5px;
+}
+.usedCommand .activeCommand_location, .usedCommand .usedCommand_location, .activeCommand .activeCommand_location, .activeCommand .usedCommand_location {
+  color: #6b9bd9;
+}
+.usedCommand .usedCommand_value, .activeCommand .usedCommand_value {
+  color: #f2eff8;
+  margin-left: 10px;
+}
+
+.helpCommand .helpCommandContent {
+  margin: 40px 0px;
+}
+.helpCommand .helpCommandContent pre {
+  color: #f2eff8;
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+.helpCommand .helpCommandContent pre span {
+  color: #b77ed1;
+  text-shadow: #b77ed1 1px 0 10px;
+}
+
+.noResult {
+  margin: 20px 0px;
+}
+.noResult pre {
+  color: #f2eff8;
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+.noResult pre span {
+  color: #b77ed1;
+  text-shadow: #b77ed1 1px 0 10px;
+}/*# sourceMappingURL=style.css.map */
