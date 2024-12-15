@@ -111,4 +111,55 @@ body {
 .noResult pre span {
   color: #b77ed1;
   text-shadow: #b77ed1 1px 0 10px;
+}
+
+.errorResult {
+  margin: 40px 0px;
+}
+.errorResult p {
+  color: #f2eff8;
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+.errorResult p span {
+  color: #ff0b0b;
+  text-shadow: #ff0b0b 1px 0 10px;
+}
+
+.sucessResult {
+  margin: 40px 0px;
+}
+.sucessResult pre {
+  color: #f2eff8;
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+.sucessResult pre span {
+  color: #0bff5c;
+  text-shadow: #0bff5c 1px 0 10px;
+}
+
+.journals {
+  display: flex;
+  flex-wrap: wrap;
+}
+.journals .journals_journal {
+  margin: 20px 50px;
+  border: 1px solid white;
+  width: 300px;
+}
+.journals .journals_journal .journals_journal_title {
+  padding: 20px;
+  border-bottom: 1px solid white;
+}
+.journals .journals_journal .journals_journal_title h1 {
+  font-size: 20px;
+  color: #b77ed1;
+  text-shadow: #b77ed1 1px 0px 10px;
+}
+.journals .journals_journal .journals_journal_content {
+  padding: 20px;
+}
+.journals .journals_journal .journals_journal_content pre {
+  color: white;
 }/*# sourceMappingURL=style.css.map */

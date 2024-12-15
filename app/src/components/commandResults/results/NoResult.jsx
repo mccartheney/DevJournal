@@ -1,3 +1,5 @@
+// component to warn user the command dont exist
+
 const NoResult = () => {
     return (
         <div className="noResult">
