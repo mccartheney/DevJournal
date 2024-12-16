@@ -2,12 +2,16 @@
     display: flex
     flex-wrap: wrap
     .journals_journal
+        background-color: $subBgColor
         margin: 20px 50px
-        border: 1px solid white
+        border: 1px solid $atcColor
         width: 300px
+        max-height: 250px
+        overflow-y: hidden
+        box-shadow: $atcColor 0px 0px 10px
         .journals_journal_title
             padding: 20px
-            border-bottom: 1px solid white
+            border: 1px solid $atcColor
             h1
                 font-size: 20px
                 color: $atcColor
@@ -15,5 +19,9 @@
 
         .journals_journal_content
             padding: 20px
-            pre
-                color: white
+            div
+                height: 80vh
+                overflow-y: hidden
+                font-size: 20px
+                color: $txtColor
+                resize: none

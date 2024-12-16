@@ -6,8 +6,9 @@ import axios from 'axios'
 import Error from "./results/Error"
 import Sucess from "./results/Sucess"
 import ListJournals from "./results/ListJournals"
+import mdPlaceholder from "../../placeholder/mdPlaceholder"
 
-const CommandResultList = ({setOutputList, lastCommand, commandList, outputsList }) => {
+const CommandResultList = ({ terminalInputRef,setMdCode, mdCode, mdTitle,action,setAction, setMdTitle,setActualState, setOutputList, lastCommand, commandList, outputsList }) => {
     // ref to cehck if is the first rendes (first render should be ignored, if not will render a empty usedCommand)
     const isFirstRender = useRef(true)
 
@@ -25,11 +26,19 @@ const CommandResultList = ({setOutputList, lastCommand, commandList, outputsList
         setOutputList(oldOutputList => [...oldOutputList, commandLine])
         
         // switch to manage the command made by user
-        switch (lastCommand) {
-            case "new" :
+        switch (true) {
+            case lastCommand == "new" :
                 // post to create a journal
-                axios.post("http://localhost:8005/api/create")
+                axios.post("http://localhost:8005/api/create",{
+                        initialContent : mdPlaceholder
+                })
                     .then(response => {
+                        const date = new Date()
+                        setMdTitle(`${date.getMonth()}/${date.getDate()}/${date.getFullYear()}`)
+                        setMdCode(mdPlaceholder)
+                        setAction("edit")
+
+                        setActualState("editing")
                         // warn user which the daily journal have created
                         setOutputList(oldOutputList => [...oldOutputList, <Sucess sucessMessage={"The jornal of today have been "} sucesslight={"created sucessfully"} />])
                     })
@@ -39,9 +48,58 @@ const CommandResultList = ({setOutputList, lastCommand, commandList, outputsList
                         // if api send status (500) warn to user that something wrong happened on server
                         else setOutputList(oldOutputList => [...oldOutputList, <Error errorMessage={"Internal Error"} />])
                     }) 
+
+                break;
+            
+            case lastCommand.startsWith("view"):
+                const journalToView = lastCommand.split(" ")[1]
+
+                axios.get('http://localhost:8005/api/view', {
+                    params: { journalToView: journalToView }
+                })
+                    .then (response => {
+                        if (response.status == 200) {
+                            const { journalName, journalContent } = response.data
+                            setMdTitle (journalName)
+                            setMdCode (journalContent)
+                            setAction ("view")
+                            
+                            setActualState("viewing")
+                        }
+                        
+                    })
+                    .catch (error => {
+                        if (error.status == 404) setOutputList(oldOutputList => [...oldOutputList, <Error errorMessage={`Journal '${journalToView}' Not Found`} />])
+                        else setOutputList(oldOutputList => [...oldOutputList, <Error errorMessage={"Internal Error"} />])
+
+                    })
+
+                break;
+                
+            case lastCommand.startsWith("edit"):
+                const journalToEdit = lastCommand.split(" ")[1]
+                axios.get('http://localhost:8005/api/view', {
+                    params: { journalToView: journalToEdit }
+                })
+                    .then(response => {
+                        if (response.status == 200) {
+                            const { journalName, journalContent } = response.data
+                            setMdTitle(journalName)
+                            setMdCode(journalContent)
+                            setAction("edit")
+
+                            setActualState("editing")
+                        }
+                    })
+                    .catch(error => {
+                        if (error.status == 404) setOutputList(oldOutputList => [...oldOutputList, <Error errorMessage={`Journal '${journalToEdit}' Not Found`} />])
+                        else setOutputList(oldOutputList => [...oldOutputList, <Error errorMessage={"Internal Error"} />])
+
+                    })
+
                 break;
 
-            case "list" :
+            case lastCommand == "list" :
                 // get to get all journals
                 axios.get('http://localhost:8005/api/list')
                 .then (response => {
@@ -55,24 +113,45 @@ const CommandResultList = ({setOutputList, lastCommand, commandList, outputsList
                     })
 
                 break;
+            
+            case lastCommand.startsWith("delete"):
+                const splitedCommand = lastCommand.split(" ")
+                const journalToDelete = splitedCommand[1]
+            
+                axios.delete('http://localhost:8005/api/delete', {
+                    data: { journalToDelete: journalToDelete }
+                })
+                    .then(response => {
+                        setOutputList(oldOutputList => [...oldOutputList, <Sucess sucessMessage={`The journal of the date '${journalToDelete}' have been `} sucesslight={"deleted sucessfully"} />])
+                    })
+                    .catch(error => {
+                        
+                        if (error.status == 404) setOutputList(oldOutputList => [...oldOutputList, <Error errorMessage={`The journal of '${journalToDelete}' Dont exists`} />])
+                        else setOutputList(oldOutputList => [...oldOutputList, <Error errorMessage={"Internal Error"} />])
+                    })                
 
-                    
-            case "help" :
+                break;
+
+            case lastCommand == "help" :
                 // show all commands options
                 setOutputList(oldOutputList => [...oldOutputList, <Help/>])
+
+
                 break;
-            case "clear":
+            case lastCommand == "clear":
                 // clear the outputList
                 setOutputList([])
+
                 break;
         
             default:
+                
                 // if is a command that not exists, warn it to user 
                 setOutputList(oldOutputList => [...oldOutputList, <NoResult/>])
 
+
                 break;
-        }
-        
+        }        
     }, [commandList]) // do this everytime the command list updates
 
     

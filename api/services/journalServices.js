@@ -1,6 +1,6 @@
 const journalModel = require ("../models/journal")
 
-const createJornal = async (journalName) =>  {
+const createJornal = async (journalName, initialContent) =>  {
     // on return false = journal already exists
     // on return true = journal created
     // on return 2 = error on creation journal
@@ -13,7 +13,7 @@ const createJornal = async (journalName) =>  {
             // create todays journals
             const newJournal = new journalModel({
                 journalName: journalName, 
-                journalContent: "#hello"
+                journalContent: initialContent
             });
     
             await newJournal.save();
@@ -32,7 +32,31 @@ const listJournals = async () => {
     return allJournals
 }
 
+const removeJournal = async (journalName) => {
+    const removedJournal = await journalModel.findOneAndDelete({ journalName: journalName })
+    return removedJournal
+}
+
+const viewJournal = async(journalName) => {
+    const searchedJournal = await journalModel.findOne({ journalName: journalName })
+    return searchedJournal
+}
+
+const editJournal = async(journalName, updatedContent) => {
+    const filter = { journalName: journalName }
+    const update = { journalContent : updatedContent}
+
+    const canEditJournal = await journalModel.findOneAndUpdate(filter, update)
+    console.log(canEditJournal);
+    
+    if (canEditJournal) return true
+    return false
+}
+
 module.exports = {
     createJornal,
-    listJournals
+    listJournals,
+    removeJournal,
+    viewJournal,
+    editJournal
 }

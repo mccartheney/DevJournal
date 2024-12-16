@@ -4,7 +4,7 @@ const Help = () => {
         <div className="helpCommand">
             <div className="helpCommandContent">
                 <pre>
-                    &emsp;&emsp;&emsp;help                         <span>Clear the logs</span>
+                    &emsp;&emsp;&emsp;help                         <span>Show all the commands</span>
                 </pre>
                 <pre>
                     &emsp;&emsp;&emsp;clear                        <span>Clear the logs</span>

@@ -1,10 +1,7 @@
 import { useRef, useState } from "react"
 
 const ActiveCommand = ({ terminalInputRef, setLastCommand, setCommandList }) => {
-    // ref to get the form where will be the command
-    const formRef = useRef()
-
-    
+        
     const submitCommand = (event) => {
         // dont reload the page
         event.preventDefault();
@@ -40,7 +37,7 @@ const ActiveCommand = ({ terminalInputRef, setLastCommand, setCommandList }) => 
                 </p>
             </div>
             <form className="activeCommand_input" onSubmit={submitCommand}>
-                <input type="text" ref={terminalInputRef}/>
+                <input type="text" ref={terminalInputRef} autoFocus/>
                 <button type="submit" style={{display:"none"}}></button>
             </form>
         </div>

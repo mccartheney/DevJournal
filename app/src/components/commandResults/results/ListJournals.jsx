@@ -1,3 +1,5 @@
+import { marked } from 'marked';
+
 // component to list all journals
 
 const ListJournals = (({allJournals}) => {
@@ -12,9 +14,8 @@ const ListJournals = (({allJournals}) => {
                             </h1>
                         </div>
                         <div className="journals_journal_content">
-                            <pre>
-                                {journal.journalContent}
-                            </pre>
+                            <div className="mdStyle" dangerouslySetInnerHTML={{ __html: marked(journal.journalContent) }} />
+                            
                         </div>
                     </div>
                 )
