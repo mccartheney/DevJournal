@@ -1,49 +1,107 @@
-services :
-  app :
-    build :
-      context : ./app
-      dockerfile : app.Dockerfile
+# services :
+#   app :
+#     build :
+#       context : ./app
+#       dockerfile : app.Dockerfile
     
-    volumes :
+#     volumes :
+#       - ./app:/app
+    
+#     ports :
+#       - 3000:3000
+
+#   api :
+#     build :
+#       context : ./api
+#       dockerfile : api.Dockerfile
+    
+#     volumes: 
+#       - ./api:/api
+
+#     ports : 
+#       - 8005:8005
+
+#   mongo:
+#     image: mongo
+#     restart: always
+#     volumes:
+#       - data:/data/db
+#       - config:/data/configdb
+#       - ./initdb.d:/docker-entrypoint-initdb.d
+#     environment:
+#       MONGO_INITDB_DATABASE: journal_db
+#       MONGO_INITDB_ROOT_USERNAME: admin
+#       MONGO_INITDB_ROOT_PASSWORD: password
+
+#   mongo-express:
+#     image: mongo-express
+#     restart: always
+#     ports:
+#       - 8081:8081
+#     environment:
+#       ME_CONFIG_MONGODB_ADMINUSERNAME: admin
+#       ME_CONFIG_MONGODB_ADMINPASSWORD: password
+#       ME_CONFIG_MONGODB_URL: mongodb://admin:password@mongo:27017/?authSource=admin
+#       ME_CONFIG_BASICAUTH: false
+  
+
+# volumes:
+#   config:
+#   data:
+
+services:
+  app:
+    build:
+      context: ./app
+      dockerfile: app.Dockerfile
+    volumes:
       - ./app:/app
-    
-    ports :
-      - 3000:3000
+    networks:
+      - webnet
+    expose:
+      - "3000"  # Expõe a porta 3000 para Nginx, mas não ao host
 
-  api :
-    build :
-      context : ./api
-      dockerfile : api.Dockerfile
-    
-    volumes: 
+  api:
+    build:
+      context: ./api
+      dockerfile: api.Dockerfile
+    volumes:
       - ./api:/api
-
-    ports : 
-      - 8005:8005
+    networks:
+      - webnet
+    expose:
+      - "8005"  # Expõe a porta 8005 para Nginx, mas não ao host
 
   mongo:
     image: mongo
     restart: always
     volumes:
       - data:/data/db
-      - config:/data/configdb
-      - ./initdb.d:/docker-entrypoint-initdb.d
     environment:
       MONGO_INITDB_DATABASE: journal_db
       MONGO_INITDB_ROOT_USERNAME: admin
       MONGO_INITDB_ROOT_PASSWORD: password
+    networks:
+      - webnet
 
-  mongo-express:
-    image: mongo-express
-    restart: always
+  nginx:
+    image: nginx:latest
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - ./ssl:/etc/ssl
     ports:
-      - 8081:8081
-    environment:
-      ME_CONFIG_MONGODB_ADMINUSERNAME: admin
-      ME_CONFIG_MONGODB_ADMINPASSWORD: password
-      ME_CONFIG_MONGODB_URL: mongodb://admin:password@mongo:27017/?authSource=admin
-      ME_CONFIG_BASICAUTH: false
+      - "443:443"
+      - "80:80"
+    networks:
+      - webnet
+    depends_on:
+      - app
+      - api
+
+networks:
+  webnet:
+    driver: bridge
 
 volumes:
-  config:
   data:
+  config:

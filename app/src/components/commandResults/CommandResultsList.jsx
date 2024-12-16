@@ -29,7 +29,7 @@ const CommandResultList = ({ terminalInputRef,setMdCode, mdCode, mdTitle,action,
         switch (true) {
             case lastCommand == "new" :
                 // post to create a journal
-                axios.post("http://localhost:8005/api/create",{
+                axios.post("https://devjournal/api/create",{
                         initialContent : mdPlaceholder
                 })
                     .then(response => {
@@ -54,7 +54,7 @@ const CommandResultList = ({ terminalInputRef,setMdCode, mdCode, mdTitle,action,
             case lastCommand.startsWith("view"):
                 const journalToView = lastCommand.split(" ")[1]
 
-                axios.get('http://localhost:8005/api/view', {
+                axios.get('https://devjournal/api/view', {
                     params: { journalToView: journalToView }
                 })
                     .then (response => {
@@ -78,7 +78,7 @@ const CommandResultList = ({ terminalInputRef,setMdCode, mdCode, mdTitle,action,
                 
             case lastCommand.startsWith("edit"):
                 const journalToEdit = lastCommand.split(" ")[1]
-                axios.get('http://localhost:8005/api/view', {
+                axios.get('https://devjournal/api/view', {
                     params: { journalToView: journalToEdit }
                 })
                     .then(response => {
@@ -101,7 +101,7 @@ const CommandResultList = ({ terminalInputRef,setMdCode, mdCode, mdTitle,action,
 
             case lastCommand == "list" :
                 // get to get all journals
-                axios.get('http://localhost:8005/api/list')
+                axios.get('https://devjournal/api/list')
                 .then (response => {
                         // if sucess show to user all journals
                         const allJournals = response.data
@@ -118,7 +118,7 @@ const CommandResultList = ({ terminalInputRef,setMdCode, mdCode, mdTitle,action,
                 const splitedCommand = lastCommand.split(" ")
                 const journalToDelete = splitedCommand[1]
             
-                axios.delete('http://localhost:8005/api/delete', {
+                axios.delete('https://devjournal/api/delete', {
                     data: { journalToDelete: journalToDelete }
                 })
                     .then(response => {

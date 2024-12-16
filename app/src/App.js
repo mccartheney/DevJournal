@@ -37,7 +37,7 @@ function App() {
         } else if (action == "edit") {
           console.log("edit");
           
-          axios.put("http://localhost:8005/api/edit", {
+          axios.put("https://devjournal/api/edit", {
               journalToEdit : mdTitle,
               journalContent : mdCode
           })
