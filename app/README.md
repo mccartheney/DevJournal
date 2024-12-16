@@ -1,70 +1,92 @@
-# Getting Started with Create React App
+# Frontend - DevJournal
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is the frontend part of the **DevJournal** project, a developer's diary application styled like a terminal. It is built using **React** and uses **SASS** for styling. The frontend interacts with a **Node.js** backend API to manage diary entries and provide a terminal-like user interface for developers.
 
-## Available Scripts
+## Table of Contents
 
-In the project directory, you can run:
+1. [Technologies Used](#technologies-used)
+2. [Project Structure](#project-structure)
+3. [Styling with SASS](#styling-with-sass)
 
-### `npm start`
+## Technologies Used
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- `React`: A JavaScript library for building the user interface (UI).
+- `SASS`: A CSS preprocessor for writing modular and maintainable CSS.
+- `Axios`: A promise-based HTTP client for making requests to the backend API.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Project Structure
 
-### `npm test`
+The frontend folder is organized as follows:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+<pre>
+.
+├── app.Dockerfile
+├── package.json
+├── package-lock.json
+├── public
+│   ├── favicon.ico
+│   ├── index.html
+│   ├── logo192.png
+│   ├── logo512.png
+│   ├── manifest.json
+│   └── robots.txt
+├── README.md
+└── src
+    ├── App.js
+    ├── components
+    │   ├── commandLine
+    │   │   ├── ActiveCommand.jsx
+    │   │   └── UsedCommand.jsx
+    │   ├── commandResults
+    │   │   ├── CommandResultsList.jsx
+    │   │   └── results
+    │   │       ├── Dev.jsx
+    │   │       ├── Error.jsx
+    │   │       ├── Help.jsx
+    │   │       ├── Init.jsx
+    │   │       ├── ListJournals.jsx
+    │   │       ├── NoResult.jsx
+    │   │       ├── Sucess.jsx
+    │   │       ├── Warning.jsx
+    │   │       └── Welcome.jsx
+    │   ├── Editing.jsx
+    │   └── Viewing.jsx
+    ├── index.js
+    ├── placeholder
+    │   └── mdPlaceholder.js
+    └── style
+        ├── base
+        │   └── _reset.sass
+        ├── components
+        │   ├── _commandLine.sass
+        │   ├── _devResult.sass
+        │   ├── _errorResult.sass
+        │   ├── _helpResult.sass
+        │   ├── _initResult.sass
+        │   ├── _journalList.sass
+        │   ├── _mdCode.sass
+        │   ├── _noResult.sass
+        │   ├── _sucessResult.sass
+        │   ├── _warningResult.sass
+        │   └── _welcomeResult.sass
+        ├── layout
+        │   ├── _editPage.sass
+        │   ├── _mainPage.sass
+        │   └── _viewing.sass
+        ├── style.css
+        ├── style.css.map
+        ├── style.sass
+        └── utils
+            ├── _colors.sass
+            └── _fonts.sass
 
-### `npm run build`
+</pre>
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Styling with SASS
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+We use **SASS** to manage our CSS styles, which allows for modularization, better organization, and the use of advanced CSS features like variables, mixins, and nesting.
 
-### `npm run eject`
+- All styles are stored in the `/src/styles` directory.
+- The main entry point for the styles is the `index.scss` file, which is imported into the `index.js` file.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
