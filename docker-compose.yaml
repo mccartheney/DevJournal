@@ -9,7 +9,7 @@ services:
       - webappNet
       - globalNet
     expose:
-      - "3000"  # Expõe a porta 3000 para Nginx, mas não ao host
+      - "3000" 
 
   api:
     build:
@@ -22,7 +22,7 @@ services:
       - dbNet
       - globalNet
     expose:
-      - "8005"  # Expõe a porta 8005 para Nginx, mas não ao host
+      - "8005"  
 
   mongo:
     image: mongo
@@ -35,7 +35,6 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: password
     networks:
       - dbNet
-      - globalNet
 
 
   mongo-express:
