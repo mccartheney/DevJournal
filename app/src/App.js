@@ -6,11 +6,13 @@ import Editing from './components/Editing';
 import Viewing from './components/Viewing';
 import Sucess from './components/commandResults/results/Sucess';
 import Error from './components/commandResults/results/Error';
+import Welcome from './components/commandResults/results/Welcome';
+import Init from './components/commandResults/results/Init';
 
 function App() {
 
   // creation of states
-  const [outputsList, setOutputsList] = useState([])
+  const [outputsList, setOutputsList] = useState([<Init/>,<Welcome/>])
   const [commandList, setCommandList] = useState([])
   const [lastCommand, setLastCommand] = useState("")
   const [actualState, setActualState] = useState("normal")
@@ -34,7 +36,7 @@ function App() {
           setActualState("normal")
           setMdTitle("")
           setMdCode("")
-        } else if (action == "edit") {
+        } else if (action == "edit" || action == "create") {
           console.log("edit");
           
           axios.put("https://devjournal/api/edit", {
@@ -43,7 +45,9 @@ function App() {
           })
             .then (response => {
               
-              if (response.status == 200) setOutputsList(oldOutputList => [...oldOutputList, <Sucess sucessMessage={`The journal of the date '${mdTitle}' have been `} sucesslight={"edited sucessfully"} />])
+              if (action == "edit"){
+                if (response.status == 200) setOutputsList(oldOutputList => [...oldOutputList, <Sucess sucessMessage={`The journal of the date '${mdTitle}' have been `} sucesslight={"edited sucessfully"} />])
+              }
               
             }).catch(error => {
               if (error.status == 404) setOutputsList(oldOutputList => [...oldOutputList, <Error errorMessage={`The journal of '${mdTitle}' Dont exists`} />])

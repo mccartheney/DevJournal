@@ -25,9 +25,6 @@ const Help = () => {
                     &emsp;&emsp;&emsp;delete 'mm/dd/yyyy'          <span>Delete the jornal of the date view 'mm/dd/yyyy'</span>
                 </pre>
                 <pre>
-                    &emsp;&emsp;&emsp;about                        <span>Info the application</span>
-                </pre>
-                <pre>
                     &emsp;&emsp;&emsp;dev                          <span>Info about the developer</span>
                 </pre>
             </div>

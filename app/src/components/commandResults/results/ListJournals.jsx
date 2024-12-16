@@ -1,4 +1,5 @@
 import { marked } from 'marked';
+import Warning from './Warning';
 
 // component to list all journals
 
@@ -14,6 +15,7 @@ const ListJournals = (({allJournals}) => {
                             </h1>
                         </div>
                         <div className="journals_journal_content">
+                        
                             <div className="mdStyle" dangerouslySetInnerHTML={{ __html: marked(journal.journalContent) }} />
                             
                         </div>
@@ -23,5 +25,6 @@ const ListJournals = (({allJournals}) => {
         </div>
     )
 })
+
 
 export default ListJournals

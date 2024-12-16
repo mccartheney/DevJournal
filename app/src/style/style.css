@@ -57,6 +57,10 @@ body {
   background-color: #261d35;
 }
 
+main {
+  padding: 40px;
+}
+
 * {
   caret-shape: block;
   caret-color: #f2eff8;
@@ -82,7 +86,7 @@ body {
 }
 .editing .editing_textAreas div textarea, .editing .editing_textAreas div div {
   padding: 20px;
-  height: 77vh;
+  height: 75vh;
   overflow-y: scroll;
   font-size: 20px;
   color: #f2eff8;
@@ -116,7 +120,7 @@ body {
 }
 .viewing .viewing_textAreas div {
   padding: 20px;
-  height: 80vh;
+  height: 75vh;
   overflow-y: scroll;
   font-size: 20px;
   color: #f2eff8;
@@ -292,4 +296,50 @@ body {
 }
 .mdStyle li {
   margin: 0.5em 0;
+}
+
+.warning {
+  margin: 40px 0px;
+}
+.warning p {
+  color: #f2eff8;
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+.warning h1 {
+  color: #d3d630;
+  text-shadow: #d3d630 1px 0 10px;
+}
+
+.welcome p {
+  color: #f2eff8;
+  font-size: 1.3em;
+  margin-bottom: 20px;
+}
+.welcome p span {
+  color: #b77ed1;
+  text-shadow: #b77ed1 1px 0 10px;
+}
+
+.init {
+  margin-bottom: 60px;
+}
+.init p {
+  color: #f2eff8;
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+.init p span {
+  color: #b77ed1;
+  text-shadow: #b77ed1 1px 0 10px;
+}
+
+.dev p {
+  color: #f2eff8;
+  font-size: 1.3em;
+  margin-bottom: 20px;
+}
+.dev p a {
+  color: #b77ed1;
+  text-shadow: #b77ed1 1px 0 10px;
 }/*# sourceMappingURL=style.css.map */

@@ -7,6 +7,8 @@ import Error from "./results/Error"
 import Sucess from "./results/Sucess"
 import ListJournals from "./results/ListJournals"
 import mdPlaceholder from "../../placeholder/mdPlaceholder"
+import Warning from "./results/Warning"
+import Dev from "./results/Dev"
 
 const CommandResultList = ({ terminalInputRef,setMdCode, mdCode, mdTitle,action,setAction, setMdTitle,setActualState, setOutputList, lastCommand, commandList, outputsList }) => {
     // ref to cehck if is the first rendes (first render should be ignored, if not will render a empty usedCommand)
@@ -36,7 +38,7 @@ const CommandResultList = ({ terminalInputRef,setMdCode, mdCode, mdTitle,action,
                         const date = new Date()
                         setMdTitle(`${date.getMonth()}/${date.getDate()}/${date.getFullYear()}`)
                         setMdCode(mdPlaceholder)
-                        setAction("edit")
+                        setAction("create")
 
                         setActualState("editing")
                         // warn user which the daily journal have created
@@ -98,6 +100,10 @@ const CommandResultList = ({ terminalInputRef,setMdCode, mdCode, mdTitle,action,
                     })
 
                 break;
+            
+            case lastCommand == "dev" :
+                setOutputList(oldOutputList => [...oldOutputList, <Dev />])
+                break
 
             case lastCommand == "list" :
                 // get to get all journals
@@ -105,7 +111,13 @@ const CommandResultList = ({ terminalInputRef,setMdCode, mdCode, mdTitle,action,
                 .then (response => {
                         // if sucess show to user all journals
                         const allJournals = response.data
-                        setOutputList(oldOutputList => [...oldOutputList, <ListJournals allJournals={allJournals}/>])
+                    console.log(allJournals.length);
+                        
+                        if (allJournals.length == 0) {
+                            setOutputList(oldOutputList => [...oldOutputList, <Warning title={"You dont have journals"} content={'Use new to create the todays journals'} />])
+                        }else {
+                            setOutputList(oldOutputList => [...oldOutputList, <ListJournals allJournals={allJournals}/>])
+                        }
                     })
                     .catch (error => {
                         // in case of error, warn it to user
